@@ -52,7 +52,7 @@ def test_givenValidInputRequestThenReturn200AndValidPersistence(lambda_environme
             "patient_id": "123"
         },
         "body": "{\n \"case_id\": \"prof-1\", \"injury_type\": \"brown\", \"shape\": \"blue\",\"number_of_lessions\": "
-                "\"honey\", \"distributions\": \"test\", \"color\": \"low\", \"photografic_records\": \"any\" \n}",
+                "\"honey\", \"distributions\": \"test\", \"color\": \"low\" \n}",
         "isBase64Encoded": False
     }
     lambdaResponse = app.handler(event, [])
