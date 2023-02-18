@@ -1,6 +1,6 @@
 import json
 
-body_properties = ["photo_type", "tone_skin", "eye_color", "hair_coloring", "tan_effect", "sun_tolerance"]
+body_properties = ["case_id", "injury_type", "shape", "number_of_lessions", "distributions", "color", "photografic_records"]
 
 
 def validate_body_params(body):

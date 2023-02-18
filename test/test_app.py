@@ -43,34 +43,16 @@ def data_table(aws_credentials):
 
         yield TABLE_NAME
 
-
-@pytest.fixture
-def load_table_speciality(data_table):
-    client = boto3.resource("dynamodb")
-    table = client.Table(app.ENV_TABLE_NAME)
-    result = table.put_item(Item={'doctor_id': '123', 'license_number': '1212',
-                                  'status': 'pending',
-                                  'specialties': [{'specialty_name': 'dermatologist', 'status': 'pending'}]})
-    print(str(result))
-
-@pytest.fixture
-def load_table_license(data_table):
-    client = boto3.resource("dynamodb")
-    table = client.Table(app.ENV_TABLE_NAME)
-    result = table.put_item(Item={'doctor_id': '123', 'license_number': '1212',
-                                  'status': 'pending'})
-    print(str(result))
-
 def test_givenValidInputRequestThenReturn200AndValidPersistence(lambda_environment, data_table):
     event = {
-        "resource": "/patient/{patient_id}/profile",
-        "path": "/patient/123/profile",
+        "resource": "/patient/{patient_id}/case",
+        "path": "/patient/123/case",
         "httpMethod": "POST",
         "pathParameters": {
             "patient_id": "123"
         },
-        "body": "{\n \"photo_type\": \"prof-1\", \"tone_skin\": \"brown\", \"eye_color\": \"blue\",\"hair_coloring\": "
-                "\"honey\", \"tan_effect\": \"test\", \"sun_tolerance\": \"low\" \n}",
+        "body": "{\n \"case_id\": \"prof-1\", \"injury_type\": \"brown\", \"shape\": \"blue\",\"number_of_lessions\": "
+                "\"honey\", \"distributions\": \"test\", \"color\": \"low\", \"photografic_records\": \"any\" \n}",
         "isBase64Encoded": False
     }
     lambdaResponse = app.handler(event, [])
