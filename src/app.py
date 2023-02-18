@@ -25,4 +25,4 @@ def add_patient_profile(request, patient_id):
     parsed_body = json.loads(request["body"])
     parsed_body['patient_id']=  patient_id
     insert_item(parsed_body)
-    return get_item("patient_id", patient_id)
+    return get_item("case_id", parsed_body['case_id'])

@@ -32,10 +32,10 @@ def data_table(aws_credentials):
         client = boto3.client("dynamodb", region_name="us-east-1")
         client.create_table(
             KeySchema=[
-                {"AttributeName": "patient_id", "KeyType": "HASH"},
+                {"AttributeName": "case_id", "KeyType": "HASH"},
             ],
             AttributeDefinitions=[
-                {"AttributeName": "patient_id", "AttributeType": "S"},
+                {"AttributeName": "case_id", "AttributeType": "S"},
             ],
             TableName=TABLE_NAME,
             BillingMode="PAY_PER_REQUEST"
@@ -60,7 +60,7 @@ def test_givenValidInputRequestThenReturn200AndValidPersistence(lambda_environme
     client = boto3.resource("dynamodb", region_name="us-east-1")
     mockTable = client.Table(TABLE_NAME)
     response = mockTable.query(
-        KeyConditionExpression=Key('patient_id').eq('123')
+        KeyConditionExpression=Key('case_id').eq('prof-1')
     )
     items = response['Items']
     if items:
