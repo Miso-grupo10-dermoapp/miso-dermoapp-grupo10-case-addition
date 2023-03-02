@@ -1,5 +1,6 @@
 import json
 
+from datetime import date
 from db_service import insert_item, get_item
 from request_validation_utils import validate_body_params, validate_property_exist
 from request_response_utils import return_error_response, return_status_ok
@@ -24,5 +25,7 @@ def handler(event, context):
 def add_patient_profile(request, patient_id):
     parsed_body = json.loads(request["body"])
     parsed_body['patient_id']=  patient_id
+    parsed_body['creation_date'] = str(date.today())
+    parsed_body['status'] = "created"
     insert_item(parsed_body)
     return get_item("case_id", parsed_body['case_id'])
